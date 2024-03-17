@@ -15,7 +15,8 @@ body
 {
   margin: 0;
   font-family: "Manrope", sans-serif;
-  collor: var(--LightCyan);
+  color: var(--LightCyan);
+  background-color: var(--DarkBlue);
 }
 
 * {
