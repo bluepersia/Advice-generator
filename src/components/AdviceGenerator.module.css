@@ -30,13 +30,13 @@
 .linesVertical {
     display:flex;
     align-items: center;
-    gap: 10%;
+    gap: 20%;
 }
 
 .lineVertical {
     background-color: var(--LightCyan);
     border-radius: 8px;
-    width: .42em;
+    width: .33em;
     height: .64em;
 }
 
@@ -54,6 +54,13 @@
     margin-right: auto;
     position: relative;
     transform: translateY(50%);
+    transition: box-shadow 300ms;
+    cursor: pointer;
+}
+
+.imgDiceWrapper:hover 
+{
+    box-shadow: 0px 0px 20px hsla(150, 100%, 66%, 70%); ;
 }
 
 
