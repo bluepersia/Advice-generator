@@ -17,8 +17,16 @@ body
   font-family: "Manrope", sans-serif;
   color: var(--LightCyan);
   background-color: var(--DarkBlue);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 4.2%;
 }
-
+p {
+  line-height: 1.6;
+}
 * {
   box-sizing: border-box;
 }
