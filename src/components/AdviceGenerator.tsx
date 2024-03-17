@@ -35,9 +35,8 @@ export default function AdviceGenerator(): JSX.Element {
     <div className={styles.generator}>
       {slip && <p className={styles.numAdvice}>Advice #{slip.id}</p>}
       {error && <p className={styles.error}>{error.message}</p>}
-      <p className={styles.body}>
-        {(isLoading && 'Loading...') || (slip && slip.advice)}
-      </p>
+      {isLoading && <p className={styles.body}>Loading...</p>}
+      <p className={styles.body}>{slip && slip.advice}</p>
       <div className={styles.splitter}>
         <div className={styles.lineHorizontal}></div>
         <div className={styles.linesVertical}>

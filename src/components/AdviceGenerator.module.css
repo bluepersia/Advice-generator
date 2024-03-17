@@ -5,6 +5,7 @@
     background-color: var(--DarkGrayishBlue);
     padding: 1.92em 10% 0;
     text-align: center;
+    width: fit-content;
 }
 
 .numAdvice{
