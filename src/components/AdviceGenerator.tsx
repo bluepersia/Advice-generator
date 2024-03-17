@@ -1,13 +1,42 @@
 import styles from './AdviceGenerator.module.css';
 import imgDice from '../images/icon-dice.svg';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useEffect } from 'react';
 
+type Slip = {
+  id: number;
+  advice: string;
+};
 export default function AdviceGenerator(): JSX.Element {
+  const queryClient = useQueryClient();
+  const {
+    data: slip,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ['advice'],
+    queryFn: fetchAdvice,
+    staleTime: 0,
+  });
+
+  async function fetchAdvice(): Promise<Slip> {
+    const res = await fetch(
+      'https://api.adviceslip.com/advice?t=' + Math.random()
+    );
+
+    if (!res.ok) throw new Error((await res.json()).message || res.statusText);
+
+    return (await res.json()).slip;
+  }
+  useEffect(() => {
+    console.log(slip);
+  }, [slip]);
   return (
     <div className={styles.generator}>
-      <p className={styles.numAdvice}>Advice #117</p>
+      {slip && <p className={styles.numAdvice}>Advice #{slip.id}</p>}
+      {error && <p className={styles.error}>{error.message}</p>}
       <p className={styles.body}>
-        "It is easy to sit up and take notice, what's difficult is getting up
-        and taking action"
+        {(isLoading && 'Loading...') || (slip && slip.advice)}
       </p>
       <div className={styles.splitter}>
         <div className={styles.lineHorizontal}></div>
@@ -18,7 +47,14 @@ export default function AdviceGenerator(): JSX.Element {
         <div className={styles.lineHorizontal}></div>
       </div>
 
-      <div className={styles.imgDiceWrapper}>
+      <div
+        onClick={() =>
+          queryClient.invalidateQueries({
+            queryKey: ['advice'],
+          })
+        }
+        className={styles.imgDiceWrapper}
+      >
         <img src={imgDice} className={styles.imgDice} />
       </div>
     </div>
